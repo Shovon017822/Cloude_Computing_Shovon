@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ai-cloud-service — Arafat Sahin Afridi</title>
+<script src="https://js.puter.com/v2/"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14181f;
+    --panel: #1b212b;
+    --panel-edge: #2a3241;
+    --text: #d7dee8;
+    --muted: #7c8695;
+    --amber: #f2b25c;
+    --green: #6fd694;
+    --red: #e5677a;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(242,178,92,0.06), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(111,214,148,0.05), transparent 40%);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 16px;
+  }
+
+  .window {
+    width: 100%;
+    max-width: 640px;
+    background: var(--panel);
+    border: 1px solid var(--panel-edge);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #10141b;
+    border-bottom: 1px solid var(--panel-edge);
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot.r { background: #e5677a; }
+  .dot.y { background: #f2b25c; }
+  .dot.g { background: #6fd694; }
+  .titlebar span {
+    margin-left: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .screen {
+    padding: 26px 28px 30px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .line { display: flex; gap: 10px; flex-wrap: wrap; }
+  .prompt { color: var(--green); flex-shrink: 0; }
+  .cmd { color: var(--text); }
+  .out { color: var(--muted); padding-left: 22px; margin-bottom: 14px; }
+  .out strong { color: var(--text); font-weight: 500; }
+
+  .ask-block { margin-top: 22px; }
+  .ask-block .line { margin-bottom: 10px; }
+
+  textarea {
+    width: 100%;
+    min-height: 70px;
+    margin-top: 6px;
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--panel-edge);
+    background: #10141b;
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    resize: vertical;
+  }
+  textarea::placeholder { color: #4d5768; }
+  textarea:focus {
+    outline: none;
+    border-color: var(--amber);
+  }
+
+  button {
+    margin-top: 12px;
+    padding: 9px 18px;
+    background: var(--amber);
+    color: #1a1406;
+    border: none;
+    border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  button:hover { filter: brightness(1.08); }
+  button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  #response {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 6px;
+    background: #10141b;
+    border: 1px solid var(--panel-edge);
+    min-height: 24px;
+    white-space: pre-wrap;
+    color: var(--text);
+    font-size: 0.88rem;
+  }
+  #response.empty { color: #4d5768; }
+
+  .cursor {
+    display: inline-block;
+    width: 7px;
+    height: 15px;
+    background: var(--green);
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: -2px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  footer {
+    padding: 10px 28px 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: #4d5768;
+    border-top: 1px solid var(--panel-edge);
+  }
+
+  @media (max-width: 480px) {
+    .screen { padding: 20px 18px 24px; font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="window">
+    <div class="titlebar">
+      <div class="dot r"></div>
+      <div class="dot y"></div>
+      <div class="dot g"></div>
+      <span>ai-cloud-service — bash</span>
+    </div>
+
+    <div class="screen">
+      <div class="line"><span class="prompt">$</span><span class="cmd">whoami</span></div>
+      <div class="out"><strong>Arafat Sahin Afridi</strong></div>
+
+      <div class="line"><span class="prompt">$</span><span class="cmd">echo $STUDENT_ID</span></div>
+      <div class="out"><strong>2026512801</strong></div>
+
+      <div class="line"><span class="prompt">$</span><span class="cmd">echo $COURSE</span></div>
+      <div class="out"><strong>Cloud Computing</strong></div>
+
+      <div class="line"><span class="prompt">$</span><span class="cmd">echo $INSTRUCTOR</span></div>
+      <div class="out"><strong>Julfikar Hasan Mukti</strong></div>
+
+      <div class="line"><span class="prompt">$</span><span class="cmd">./ask-ai --interactive<span class="cursor"></span></span></div>
+
+      <div class="ask-block">
+        <textarea id="prompt" placeholder="type a question, then run it..."></textarea>
+        <br />
+        <button id="askBtn" onclick="askAI()">Run ▸</button>
+        <div id="response" class="empty">output will print here</div>
+      </div>
+    </div>
+
+    <footer>node.js + express · deployed on render · ai via puter.js</footer>
+  </div>
+
+  <script>
+    async function askAI() {
+      const promptEl = document.getElementById('prompt');
+      const responseEl = document.getElementById('response');
+      const btn = document.getElementById('askBtn');
+      const prompt = promptEl.value.trim();
+
+      if (!prompt) {
+        responseEl.textContent = "error: empty prompt";
+        responseEl.classList.remove('empty');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Running...";
+      responseEl.textContent = "loading...";
+      responseEl.classList.remove('empty');
+
+      try {
+        const response = await puter.ai.chat(prompt, { model: "gpt-5.4-nano" });
+        const text =
+          (response && response.message && response.message.content) ||
+          (typeof response === "string" ? response : JSON.stringify(response));
+        responseEl.textContent = text;
+      } catch (err) {
+        console.error(err);
+        responseEl.textContent = "error: could not get a response. try again.";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Run ▸";
+      }
+    }
+  </script>
+
+</body>
+</html>
