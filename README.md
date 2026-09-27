@@ -1,7 +1,7 @@
 # AI Cloud Service
 
-**Name:** Arafat Sahin Afridi
-**Student ID:** 2026512801
+**Name:** Kabir Md Humaiun
+**Student ID:** 2026512848
 
 A simple Node.js + Express web service with a functioning AI feature (chat/Q&A powered
 by the OpenAI API), built for Assignment 1: "Make a simple Render-based cloud service
